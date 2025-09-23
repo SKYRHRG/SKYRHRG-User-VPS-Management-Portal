@@ -1,0 +1,326 @@
+/**
+ * Project: SKYRHRG User Management Portal
+ * Version: 1.0
+ * Author: SKYRHRG Technologies Systems
+ *
+ * Custom CSS Stylesheet
+ */
+
+/* 1. CSS Variables for Theming */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --info-color: #0dcaf0;
+    --warning-color: #ffc107;
+    --font-family-sans-serif: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* 2. Global Styles */
+body {
+    font-family: var(--font-family-sans-serif);
+    background-color: #f4f6f9;
+}
+
+.brand-text {
+    font-weight: 300 !important;
+    color: var(--primary-color) !important;
+}
+
+.brand-text-strong {
+    font-weight: 700 !important;
+    color: var(--dark-color) !important;
+}
+
+/* 3. Login Page Styles */
+.login-page {
+    background: linear-gradient(-45deg, #343a40, #0d6efd, #0dcaf0);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.login-box {
+    width: 380px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(5px);
+}
+
+/*
+ * 4. NEW: Store / Product Card Styles
+ * --------------------------------------------------
+ */
+.product-card {
+    transition: all 0.3s ease;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+.product-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.product-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.product-price .price-period {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--secondary-color);
+}
+
+/*
+ * 5. NEW: Wallet System Styles
+ * --------------------------------------------------
+ */
+.wallet-balance-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--info-color) 100%);
+    color: #fff;
+    border-radius: 12px;
+}
+.wallet-balance-card .balance-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.transaction-list .transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+.transaction-list .transaction-item:last-child {
+    border-bottom: none;
+}
+.transaction-amount-credit {
+    color: var(--success-color);
+    font-weight: 700;
+}
+.transaction-amount-debit {
+    color: var(--danger-color);
+    font-weight: 700;
+}
+.qr-code-container {
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+/*
+ * 6. NEW: Order Management Styles
+ * --------------------------------------------------
+ */
+.status-badge {
+    padding: 0.4em 0.8em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+.status-pending { background-color: var(--warning-color); color: #fff; }
+.status-active { background-color: var(--success-color); color: #fff; }
+.status-canceled { background-color: var(--danger-color); color: #fff; }
+
+
+/* 7. Utility Classes */
+.cursor-pointer {
+    cursor: pointer;
+}
+/**
+ * Project: SKYRHRG User Management Portal
+ * Version: 2.0
+ * Author: SKYRHRG Technologies Systems
+ *
+ * Custom CSS Stylesheet
+ */
+
+/* 1. CSS Variables for Theming */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --info-color: #0dcaf0;
+    --warning-color: #ffc107;
+    --font-family-sans-serif: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 2. Global Styles & Login */
+body {
+    font-family: var(--font-family-sans-serif);
+    background-color: #f4f6f9;
+}
+.brand-text { font-weight: 300 !important; color: var(--primary-color) !important; }
+.brand-text-strong { font-weight: 700 !important; color: var(--dark-color) !important; }
+.login-page {
+    background: linear-gradient(-45deg, #343a40, #0d6efd, #0dcaf0);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    height: 100vh;
+}
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+}
+
+/* 3. Store / Product Card Styles */
+.product-card { transition: all 0.3s ease; }
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+.product-price { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); }
+.product-price .price-period { font-size: 0.9rem; font-weight: 400; color: var(--secondary-color); }
+
+/* 4. Wallet System Styles */
+.wallet-balance-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--info-color) 100%);
+    color: #fff; border-radius: 12px;
+}
+.wallet-balance-card .balance-amount { font-size: 2.5rem; font-weight: 700; }
+.transaction-list .transaction-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #eee; }
+.transaction-amount-credit { color: var(--success-color); font-weight: 700; }
+.transaction-amount-debit { color: var(--danger-color); font-weight: 700; }
+.qr-code-container { padding: 20px; border: 2px dashed #ccc; border-radius: 10px; background-color: #fafafa; }
+
+/*
+ * 5. NEW: Service/Order Card Design (for my_orders, my_services, renewals)
+ * --------------------------------------------------------------------------
+ */
+.service-card {
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+/* Status Colors */
+.service-card.status-active { border-left-color: var(--success-color); }
+.service-card.status-pending { border-left-color: var(--warning-color); }
+.service-card.status-canceled { border-left-color: var(--danger-color); }
+.service-card.status-expiring { border-left-color: var(--danger-color); animation: pulse-border 1.5s infinite; }
+
+.service-card-header { padding: 0.75rem 1.25rem; background-color: rgba(0,0,0,0.03); border-bottom: 1px solid rgba(0,0,0,0.125); }
+.service-card-body { padding: 1.25rem; }
+.service-card-footer { padding: 0.75rem 1.25rem; background-color: rgba(0,0,0,0.03); }
+.service-details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.service-detail-item strong { display: block; color: #6c757d; font-size: 0.8rem; text-transform: uppercase; }
+
+@keyframes pulse-border {
+  0% { border-left-color: var(--danger-color); }
+  50% { border-left-color: #ff8a8a; }
+  100% { border-left-color: var(--danger-color); }
+}
+
+/*
+ * 6. NEW: Deposit History Table Styles
+ * ------------------------------------------------
+ */
+.deposit-history-table { margin-top: 2rem; }
+.deposit-history-table .badge { font-size: 0.8em; }
+
+/* 7. Utility Classes */
+.cursor-pointer { cursor: pointer; }
+
+/*
+ * 8. NEW: Modern Store Design (V2)
+ * --------------------------------------------------------------------------
+ */
+.store-page .main-header {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+}
+.product-card-v2 {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    overflow: hidden; /* Important for labels */
+    position: relative;
+}
+.product-card-v2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.product-card-v2 .card-body {
+    padding: 1.5rem;
+}
+.product-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+.feature-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+.feature-list i {
+    color: var(--primary-color);
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+}
+.product-price-v2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+.product-price-v2 .price-period {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+.product-label {
+    position: absolute;
+    top: 15px;
+    right: -35px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: bounce-in 0.5s ease forwards;
+}
+.product-label.label-new { background-color: var(--success-color); }
+.product-label.label-stock { background-color: var(--warning-color); color: var(--dark-color); }
+.product-label.label-best { background-color: #e11d48; }
+
+@keyframes bounce-in {
+    0% { opacity: 0; transform: rotate(45deg) scale(0.5); }
+    100% { opacity: 1; transform: rotate(45deg) scale(1); }
+}
+
+/* 9. Utility Classes */
+.cursor-pointer { cursor: pointer; }
