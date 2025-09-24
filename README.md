@@ -198,4 +198,166 @@ Admin Username: admin
 
 Admin Password: admin123
 
+
 You can also log in with the other demo accounts to explore the permissions of each role. The password for all demo accounts is demo123.
+# VPS Control Panel – Virtualizor API Integration
+
+A PHP-based control panel for managing VPS servers via the **Virtualizor Enduser API**.  
+From a single dashboard you can list, start, stop, reboot, reinstall OS, and monitor VPS status.
+
+---
+
+## 📂 Project Structure
+
+```
+includes/
+  VirtualizorAPI.php          # PHP wrapper for Virtualizor Enduser API
+  vps_providers_config.php    # Provider API keys, URLs, credentials
+manage_vps_orders.php         # Listing VPS orders / customers
+vps_control.php               # Main UI to control VPS (start/stop/reboot/OS reinstall)
+assets/css/…                  # CSS, icons, animations
+```
+
+---
+
+## ✨ Features
+
+- List VPS and show status (IP, hostname, OS, RAM, bandwidth).
+- Start / Stop / Reboot VPS.
+- Reinstall OS from available templates.
+- Colorful, animated DataTable UI with action buttons.
+- Logging of all API calls and errors to `virtualizor_api_errors.log`.
+
+---
+
+## 🔑 How It Works
+
+1. **Configuration**  
+   All API keys, endpoint URLs, ports, and credentials live in  
+   `includes/vps_providers_config.php`:
+
+   ```php
+   return [
+       'provider_name' => [
+           'api_url'  => 'https://cp.example.com:4083/index.php',
+           'api_key'  => 'YOUR_API_KEY',
+           'api_pass' => 'YOUR_API_PASS',
+           'timeout'  => 60, // request timeout in seconds
+       ],
+       // more providers…
+   ];
+   ```
+
+2. **API Wrapper** (`VirtualizorAPI.php`)  
+   Provides methods like:
+
+   ```php
+   $vapi = new VirtualizorAPI($api_url, $api_key, $api_pass);
+   $vapi->listVS($vpsid);             // get VPS info
+   $vapi->startVPS($vpsid);           // start
+   $vapi->stopVPS($vpsid);            // stop
+   $vapi->rebootVPS($vpsid);          // reboot
+   $vapi->reinstallOS($vpsid, $osid); // reinstall OS
+   $vapi->getOsTemplates();           // list OS templates
+   ```
+
+   - Handles **cURL**, SSL, timeouts, error logging.
+   - If Virtualizor returns HTML instead of JSON (long-running commands), wrapper marks it as **queued** so the UI can poll for status.
+
+3. **UI** (`vps_control.php`)  
+   - Displays VPS info in a colorful DataTable.
+   - Buttons: **Start / Stop / Reboot / Reinstall OS**.
+   - Calls AJAX to `vps_control.php` which uses `VirtualizorAPI.php`.
+   - Shows spinner/toast while action is queued; auto-refreshes status.
+
+---
+
+## 🖥️ Installation & Setup
+
+### Requirements
+- PHP 7.x or 8.x with **cURL** enabled.
+- A Virtualizor server with Enduser API enabled.
+
+### Steps
+1. Clone/download the repository.
+2. Configure your providers in `includes/vps_providers_config.php`:
+
+   ```php
+   return [
+     'Hyper Sonic Server' => [
+        'api_url'  => 'https://cp.securednscloud.com:4083/index.php',
+        'api_key'  => 'AA0LQGAPFWOSMEIK',
+        'api_pass' => 'D1m5ADvbRxMXQc3XUATJejCVi6KYNRQK',
+        'timeout'  => 60
+     ],
+   ];
+   ```
+
+3. Include the wrapper in your scripts:
+
+   ```php
+   require_once __DIR__.'/includes/VirtualizorAPI.php';
+   require_once __DIR__.'/includes/vps_providers_config.php';
+
+   $cfg = include 'includes/vps_providers_config.php';
+   $provider = $cfg['Hyper Sonic Server'];
+
+   $api = new VirtualizorAPI(
+       $provider['api_url'],
+       $provider['api_key'],
+       $provider['api_pass'],
+       $provider['timeout']
+   );
+   ```
+
+4. Make API calls:
+
+   ```php
+   $info = $api->listVS($vpsid);
+   if ($info['status'] === 1) {
+       echo "VPS is online!";
+   }
+
+   $api->startVPS($vpsid);
+   ```
+
+---
+
+## 📝 Parameters & Responses
+
+- **listVS($vpsid)** → returns array with keys: `status`, `ip`, `hostname`, `os`, `ram`, `bandwidth`, etc.
+- **startVPS / stopVPS / rebootVPS** → returns:
+
+  ```php
+  ['status' => 'done', 'message' => 'The VPS was started successfully']
+  // or
+  ['status' => 'queued', 'message' => 'Command sent, waiting for status update…']
+  ```
+
+- **reinstallOS($vpsid, $osid)**  
+  `$osid` comes from `$api->getOsTemplates()` list.  
+  Returns either **queued** or **done**.
+
+---
+
+## ⚠️ Error Handling
+
+- All cURL and API errors logged to `virtualizor_api_errors.log` with JSON context.
+- **Timeouts**: increase `timeout` in config.
+- **SSL verify errors**: set `$verify_ssl=false` in `VirtualizorAPI.php` if needed (not recommended for production).
+- **HTML instead of JSON**: Virtualizor returned progress page; wrapper marks as **queued**.
+
+---
+
+## 🚀 Roadmap / Future Enhancements
+
+- Auto polling until start/stop/reboot finishes.
+- Bulk actions for multiple VPS.
+- More detailed resource usage graphs.
+
+---
+
+## 📚 References
+
+- [Virtualizor API Docs](https://www.virtualizor.com/docs/enduser-api/)
+- This repository’s source code.
